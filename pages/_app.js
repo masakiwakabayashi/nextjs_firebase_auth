@@ -1,20 +1,12 @@
-// import '../styles/globals.css'
-import Head from 'next/head'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { AuthProvider } from '../context/AuthContext'
 
+// 全コンポーネントをAuthProviderでラッピングする
 function MyApp({ Component, pageProps }) {
   return (
-    <>
-      <AuthProvider>
-        <Head>
-          <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
-          />
-        </Head>
-        <Component {...pageProps} />
-      </AuthProvider>
-    </>
+    <AuthProvider>
+      <Component {...pageProps} />
+    </AuthProvider>
   )
 }
 
