@@ -7,6 +7,7 @@ import { useState } from 'react';
 export default function Login() {
   const [email, setEmail] = useState('');
 
+  // 送信ボタンがクリックされるとdoResetEmail関数が実行される
   const doResetEmail = () => {
     const auth = getAuth();
     const actionCodeSettings = {
@@ -15,8 +16,10 @@ export default function Login() {
       handleCodeInApp: false,
     }
 
+    // Firebaseで用意されているパスワード再設定のメールを送るための関数
     sendPasswordResetEmail(auth, email, actionCodeSettings)
     .then(() => {
+      // パスワード再設定のメールが送信されたことをわかりやすくするためのアラート
       alert( '送信完了！' );
       console.log(email);
     })
@@ -38,12 +41,14 @@ export default function Login() {
                 type="email"
                 name="email"
                 style={{ height: 50, fontSize: "1.2rem" }}
+                // ユーザーが入力したメールアドレスを取得する
                 onChange={(e) => setEmail(e.target.value)}
               />
             </FormGroup>
             <Button
                 style={{ width: 220 }}
                 color="primary"
+                // ボタンを押すとdoResetEmaiが実行される
                 onClick={()=>{
                   doResetEmail();
                 }}

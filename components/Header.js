@@ -5,6 +5,7 @@ import { getAuth, signOut } from "firebase/auth";
 
 
 const Header = () => {
+  // 現在ログインしているユーザーを取得する
   const { currentUser } = useAuth();
   // console.log(currentUser);
 
@@ -12,9 +13,11 @@ const Header = () => {
   const doLogout = () => {
     const auth = getAuth();
 
+    // Firebaseで用意されているログアウトの関数
     signOut(auth)
     .then(() => {
-      // alert( 'ログアウト完了！' );
+      // ログアウトが完了したことをわかりやすくするためのアラート
+      alert( 'ログアウト完了！' );
     })
     .catch((error) => {
       console.log(error);
@@ -25,7 +28,9 @@ const Header = () => {
   return (
     <div style={{ padding: "1rem 0" }} >
       { currentUser ? (
+        // サーバーサイドとクライアントサイドでレンダーされる内容が違うときにエラーがでないようにする
         <div suppressHydrationWarning={true}>
+          {/* useAuth()で取得した現在ログインしているユーザーのメールアドレスを表示 */}
           <div style={{ paddingBottom: "1rem" }}>{ currentUser.email } でログインしています。</div>
           <div>
             <Button onClick={()=>{
